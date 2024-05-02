@@ -1,4 +1,5 @@
-example_setting:
+allow_top_bottom_previews:
   default: true
+  type: bool
   description:
-    en: A description of a setting.
+    en: Allow composer previews to be on the top or bottom of the editor.

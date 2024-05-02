@@ -9,7 +9,7 @@
   "minimum_discourse_version": null,
   "maximum_discourse_version": null,
   "assets": {
+    "icons-sprite": "/assets/custom-svgs.svg"
   },
-  "modifiers": {
-  }
+  "modifiers": {}
 }

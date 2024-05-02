@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Additional SVG icons
+-->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <!-- From modified from https://lucide.dev/icons/columns-2 -->
+
+  <symbol id="editor-preview-cols-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-columns-2">
+    <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M12 3v18"/>
+  </symbol>
+
+  <!-- modified from https://phosphoricons.com?q=%22square-half%22&size=20&weight=%22fill%22 -->
+  <symbol id="editor-preview-right" fill="currentColor" viewBox="40 40 176 176">
+    <path d="M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M56 56h72v144H56Z"/>
+  </symbol>
+  <symbol id="editor-preview-left" fill="currentColor" viewBox="40 40 176 176" transform-origin="center center" transform="scale(-1 1)">
+    <path d="M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M56 56h72v144H56Z"/>
+  </symbol>
+  <symbol id="editor-preview-top" fill="currentColor" viewBox="40 40 176 176" transform-origin="center center" transform="rotate(180)">
+    <path d="M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m0 16v72H56V56Z"/>
+  </symbol>
+  <symbol id="editor-preview-bottom" fill="currentColor" viewBox="40 40 176 176">
+    <path d="M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m0 16v72H56V56Z"/>
+  </symbol>
+</svg>
