@@ -1,5 +1,29 @@
+top_bar_preview_button:
+  default: true
+  type: bool
+  description:
+    en: Move the preview button to the top bar.
+
 allow_top_bottom_previews:
   default: true
   type: bool
   description:
-    en: Allow composer previews to be on the top or bottom of the editor.
+    en: Allow the composer preview to be on the top or bottom of the editor.
+
+allow_resizable_horizontal_previews:
+  default: true
+  type: bool
+  description:
+    en: Allow the composer preview to be resized horizontally.
+
+allow_resizable_vertical_previews:
+  default: true
+  type: bool
+  description:
+    en: Allow the composer preview to be resized vertically.
+
+clean_composer_style:
+  default: false
+  type: bool
+  description:
+    en: Alters the composer style to more closely match the fullscreen composer style.

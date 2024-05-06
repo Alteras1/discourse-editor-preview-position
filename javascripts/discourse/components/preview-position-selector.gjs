@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { hash } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import DButton from "discourse/components/d-button";
 import I18n from "discourse-i18n";
 import DropdownSelectBox from "select-kit/components/dropdown-select-box";
 
@@ -65,6 +66,10 @@ export default class PreviewPositionSelector extends Component {
     return options;
   }
 
+  get showHidePreviewIcon() {
+    return this.composer.showPreview ? "eye" : "eye-slash";
+  }
+
   @action
   setPreviewLocation(location) {
     document.body.classList.remove(
@@ -94,22 +99,41 @@ export default class PreviewPositionSelector extends Component {
 
   <template>
     {{#unless this.site.mobileView}}
-      <DropdownSelectBox
-        @nameProperty="label"
-        @onChange={{this.setPreviewLocation}}
-        @options={{hash
-          showCaret=false
-          showFullTitle=true
-          headerAriaLabel="preview_location"
-          title=(themePrefix "preview_location")
-          customStyle=true
-          fitlerable=false
-          autoFilterable=false
-        }}
-        @content={{this.options}}
-        @value={{this.previewLocation}}
-        class="preview-position-selector"
-      />
+      {{#if settings.top_bar_preview_button}}
+        {{#if this.composer.showPreview}}
+          <DButton
+            @action={{this.composer.togglePreview}}
+            @translatedTitle={{this.composer.toggleText}}
+            @icon="editor-preview-hide"
+            class="btn-flat btn-mini-toggle"
+          />
+        {{else}}
+          <DButton
+            @action={{this.composer.togglePreview}}
+            @translatedTitle={{this.composer.toggleText}}
+            @icon="editor-preview-show"
+            class="btn-flat btn-mini-toggle"
+          />
+        {{/if}}
+      {{/if}}
+      {{#if this.composer.showPreview}}
+        <DropdownSelectBox
+          @nameProperty="label"
+          @onChange={{this.setPreviewLocation}}
+          @options={{hash
+            showCaret=false
+            showFullTitle=true
+            headerAriaLabel="preview_location"
+            title=(themePrefix "preview_location")
+            customStyle=true
+            fitlerable=false
+            autoFilterable=false
+          }}
+          @content={{this.options}}
+          @value={{this.previewLocation}}
+          class="preview-position-selector"
+        />
+      {{/if}}
     {{/unless}}
   </template>
 }

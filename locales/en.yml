@@ -1,4 +1,6 @@
 en:
+  theme_metadata:
+    description: "Adds a dropdown in the composer that lets users choose where the preview is positioned. Only works in desktop view."
   preview_location: change preview location
   preview_location_title: Preview Location
   preview_location_top: "change preview location: top"
@@ -6,5 +8,3 @@ en:
   preview_location_left: "change preview location: left"
   preview_location_right: "change preview location: right"
   preview_location_none: None
-  theme_metadata:
-    description: Allows users to change where the editor preview is displayed
