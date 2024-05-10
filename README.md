@@ -1,8 +1,6 @@
 # Editor Preview Position
 
-**Theme Summary**
-
-For more information, please see: **url to meta topic**
+Allows the user to reposition the preview in the composer for Discourse.
 
 ## Local Development
 
