@@ -105,14 +105,14 @@ export default class PreviewPositionSelector extends Component {
             @action={{this.composer.togglePreview}}
             @translatedTitle={{this.composer.toggleText}}
             @icon="editor-preview-hide"
-            class="btn-flat btn-mini-toggle"
+            class="btn-flat btn-mini-toggle top-bar-preview"
           />
         {{else}}
           <DButton
             @action={{this.composer.togglePreview}}
             @translatedTitle={{this.composer.toggleText}}
             @icon="editor-preview-show"
-            class="btn-flat btn-mini-toggle"
+            class="btn-flat btn-mini-toggle top-bar-preview"
           />
         {{/if}}
       {{/if}}

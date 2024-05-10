@@ -114,6 +114,9 @@
   .toggle-preview {
     display: none;
   }
+  .draft .top-bar-preview {
+    display: none;
+  }
 }
 
 @if $clean_composer_style == 'true' {
