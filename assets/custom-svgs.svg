@@ -17,28 +17,10 @@ Additional SVG icons
     <path d="M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m0 16v72H56V56Z"/>
   </symbol>
 
-  <!-- from https://lucide.dev/icons/eye -->
-  <!-- <symbol id="editor-preview-show" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye">
-    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
-  </symbol> -->
-
-  <!-- from https://lucide.dev/icons/eye-off -->
-  <!-- <symbol id="editor-preview-hide" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off">
-    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
-    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
-    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
-    <line x1="2" x2="22" y1="2" y2="22"/>
-  </symbol> -->
-
   <!-- modified from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Apreview%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4020 -->
   <symbol id="editor-preview-show" fill="currentColor" viewBox="144 -816 672 672"><path d="M216-144q-29.7 0-50.85-21.15T144-216v-528q0-29.7 21.15-50.85T216-816h528q29.7 0 50.85 21.15T816-744v528q0 29.7-21.15 50.85T744-144zm0-72h528v-456H216zm263.88-84Q406-300 348-340.5T264-444q26-63 84.12-103.5 58.11-40.5 132-40.5Q554-588 612-547.5T696-444q-26 63-84.12 103.5-58.11 40.5-132 40.5m.12-48q53 0 95.88-25.44T643-444q-24.24-45.12-67.12-70.56T480-540t-95.88 25.44T317-444q24.24 45.12 67.12 70.56T480-348m0-36q25 0 42.5-17.5T540-444t-17.5-42.5T480-504t-42.5 17.5T420-444t17.5 42.5T480-384"/></symbol>
 
   <!-- modified from https://fonts.google.com/icons?selected=Material%20Symbols%20Rounded%3Apreview_off%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4020 -->
-  <symbol id="editor-preview-hide" fill="currentColor" viewBox="83.18 -652.8 569.62 569.6"><path d="M384-240q-59.2 0-105.6-32.4t-67.2-82.8q13.6-34.4 40-60.4T312-456l29.6 29.6q-28 8.8-50.8 27.2t-37.2 44q19.2 36 53.6 56.4t76.8 20.4q23.2 0 43.6-6.4t38-17.6l27.2 28q-23.2 16-50.8 25.2t-58 9.2m150.4-75.2-27.2-27.2q1.6-3.2 3.6-6.4t3.6-6.4Q500-382.4 476-400.8t-53.6-26.4l-43.2-43.2q59.2 0 108 32.4t69.6 82.8q-4 11.2-10 21.2t-12.4 18.8m-361.6 200q-24 0-40.8-16.8t-16.8-40.8v-398.4L92-594.4q-8.8-8.8-8.8-20t8.8-20 20.8-8.8 20.8 8.8L635.2-132q8.8 8.8 8.8 20t-8.8 20-20 8.8-20-8.8l-24-23.2zm0-57.6h340.8L172.8-513.6zm480-24-57.6-57.6v-244.8H350.4L196.8-652.8h398.4q24 0 40.8 16.8t16.8 40.8z"/></symbol>
-
-  <!-- modified from https://fonts.google.com/icons?selected=Material%20Symbols%20Rounded%3Afont_download%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024 -->
-  <!-- <symbol id="editor-preview-show" viewBox="80 -880 800 800" fill="currentColor"><path d="M384-362h192l35 97q4 11 14 18t22 7q20 0 32.5-16.5T684-293L532-695q-5-11-15-18t-22-7h-30q-12 0-22 7t-15 18L276-293q-8 19 4 36t32 17q13 0 22.5-7t14.5-19zm24-70 70-198h4l70 198zM160-80q-33 0-56.5-23.5T80-160v-640q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v640q0 33-23.5 56.5T800-80zm0-80h640v-640H160zm0-640v640z"/></symbol> -->
-  <!-- modified from https://fonts.google.com/icons?selected=Material%20Symbols%20Rounded%3Afont_download_off%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024 -->
-  <!-- <symbol id="editor-preview-hide" fill="currentColor" viewBox="43 -880 837 835"><path d="m791-57-24-23H160q-33 0-56.5-23.5T80-160v-607l-25-25q-12-12-12-28.5T55-849t28.5-12 28.5 12l736 736q12 12 12 28t-12 28-28.5 12T791-57M160-160h527L160-687zm720-640v509q0 27-24.5 37t-43.5-9q-6-6-9-13.5t-3-15.5v-508H292q-8 0-15.5-3t-13.5-9q-19-19-8.5-43.5T292-880h508q33 0 56.5 23.5T880-800M624-451 502-573l-20-57h-4l-9 24-54-54 13-35q5-11 15-18t22-7h30q12 0 22 7t15 18zm-61 53 123 123q-2 14-12.5 24.5T647-240q-12 0-22-7t-14-18zm-179 36-35 97q-4 11-14 18t-22 7q-20 0-32.5-16.5T276-293l108-284 56 56-32 89h121l70 70z"/></symbol> -->
+  <symbol id="editor-preview-hide" fill="currentColor" viewBox="83.2 -652.8 569.6 569.6"><path d="M384-240q-59 0-106-32t-67-83q14-35 40-61t61-40l30 30q-28 8-51 27t-37 44q19 36 53 56t77 21q23 0 44-7t38-17l27 28q-23 16-51 25t-58 9m150-75-27-27 4-7 3-6q-14-27-38-46t-54-26l-43-43q59 0 108 32t70 83q-4 11-10 21t-13 19M173-115q-24 0-41-17t-17-41v-398l-23-23q-9-9-9-20t9-20 21-9 21 9l501 502q9 9 9 20t-9 20-20 9-20-9l-24-23zm0-58h341L173-514zm480-24-58-57v-245H350L197-653h398q24 0 41 17t17 41z"/></symbol>
 
 </svg>
