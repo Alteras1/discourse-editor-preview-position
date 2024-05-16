@@ -73,9 +73,10 @@ export default class PreviewDragbar extends Component {
     if (this.horizontalDragging) {
       const currentMousePos = mouseXPos(e);
       // let the CSS handle the max min
-      const offset = localStorage.getItem("composer-preview-location") === "left"
-        ? (currentMousePos - this.lastMousePos)
-        : (this.lastMousePos - currentMousePos);
+      const offset =
+        localStorage.getItem("composer-preview-location") === "left"
+          ? currentMousePos - this.lastMousePos
+          : this.lastMousePos - currentMousePos;
       const pointerRelativeXpos = this.origPreviewSize + offset;
       document.documentElement.style.setProperty(
         "--composer-preview-width",
@@ -93,9 +94,10 @@ export default class PreviewDragbar extends Component {
     if (this.verticalDragging) {
       const currentMousePos = mouseYPos(e);
       // let the CSS handle the max min
-      const offset = localStorage.getItem("composer-preview-location") === "top"
-        ? (currentMousePos - this.lastMousePos)
-        : (this.lastMousePos - currentMousePos);
+      const offset =
+        localStorage.getItem("composer-preview-location") === "top"
+          ? currentMousePos - this.lastMousePos
+          : this.lastMousePos - currentMousePos;
       const pointerRelativeXpos = this.origPreviewSize + offset;
       document.documentElement.style.setProperty(
         "--composer-preview-height",
@@ -129,7 +131,7 @@ export default class PreviewDragbar extends Component {
     event.preventDefault();
     this.horizontalDragging = event.target.className.includes("horizontal");
     this.verticalDragging = event.target.className.includes("vertical");
-    const preview = document.querySelector('.d-editor-preview-wrapper');
+    const preview = document.querySelector(".d-editor-preview-wrapper");
 
     if (!preview) {
       // this shouldn't be necessary, but in the off chance that preview isn't available...
@@ -196,35 +198,40 @@ export default class PreviewDragbar extends Component {
 
   @action
   doubleClick() {
-    if (document.documentElement.style.getPropertyValue('--composer-preview-flex') === 'none') {
-      document.documentElement.style.setProperty('--composer-preview-flex', '');
+    if (
+      document.documentElement.style.getPropertyValue(
+        "--composer-preview-flex"
+      ) === "none"
+    ) {
+      document.documentElement.style.setProperty("--composer-preview-flex", "");
       localStorage.removeItem("composerPreviewFlex");
     } else {
-      document.documentElement.style.setProperty("--composer-preview-flex", "none");
+      document.documentElement.style.setProperty(
+        "--composer-preview-flex",
+        "none"
+      );
       localStorage.setItem("composerPreviewFlex", "none");
     }
   }
 
   <template>
-    {{#unless this.site.mobileView}}
-      {{#if this.composer.showPreview}}
-        {{#if settings.allow_resizable_horizontal_previews}}
-          <div
-            class="preview-dragbar-horizontal"
-            {{didInsert this.registerListeners}}
-            {{willDestroy this.unregisterListeners}}
-            {{on "dblclick" (fn this.doubleClick "horizontal")}}
-          ></div>
-        {{/if}}
-        {{#if settings.allow_resizable_vertical_previews}}
-          <div
-            class="preview-dragbar-vertical"
-            {{didInsert this.registerListeners}}
-            {{willDestroy this.unregisterListeners}}
-            {{on "dblclick" (fn this.doubleClick "vertical")}}
-          ></div>
-        {{/if}}
+    {{#if this.composer.showPreview}}
+      {{#if settings.allow_resizable_horizontal_previews}}
+        <div
+          class="preview-dragbar-horizontal"
+          {{didInsert this.registerListeners}}
+          {{willDestroy this.unregisterListeners}}
+          {{on "dblclick" (fn this.doubleClick "horizontal")}}
+        ></div>
       {{/if}}
-    {{/unless}}
+      {{#if settings.allow_resizable_vertical_previews}}
+        <div
+          class="preview-dragbar-vertical"
+          {{didInsert this.registerListeners}}
+          {{willDestroy this.unregisterListeners}}
+          {{on "dblclick" (fn this.doubleClick "vertical")}}
+        ></div>
+      {{/if}}
+    {{/if}}
   </template>
 }

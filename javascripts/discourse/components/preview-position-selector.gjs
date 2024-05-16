@@ -9,7 +9,6 @@ import DropdownSelectBox from "select-kit/components/dropdown-select-box";
 
 export default class PreviewPositionSelector extends Component {
   @service composer;
-  @service site;
 
   @tracked _previewLocation = "right";
 
@@ -98,42 +97,40 @@ export default class PreviewPositionSelector extends Component {
   }
 
   <template>
-    {{#unless this.site.mobileView}}
-      {{#if settings.top_bar_preview_button}}
-        {{#if this.composer.showPreview}}
-          <DButton
-            @action={{this.composer.togglePreview}}
-            @translatedTitle={{this.composer.toggleText}}
-            @icon="editor-preview-hide"
-            class="btn-flat btn-mini-toggle top-bar-preview"
-          />
-        {{else}}
-          <DButton
-            @action={{this.composer.togglePreview}}
-            @translatedTitle={{this.composer.toggleText}}
-            @icon="editor-preview-show"
-            class="btn-flat btn-mini-toggle top-bar-preview"
-          />
-        {{/if}}
-      {{/if}}
+    {{#if settings.top_bar_preview_button}}
       {{#if this.composer.showPreview}}
-        <DropdownSelectBox
-          @nameProperty="label"
-          @onChange={{this.setPreviewLocation}}
-          @options={{hash
-            showCaret=false
-            showFullTitle=true
-            headerAriaLabel="preview_location"
-            title=(themePrefix "preview_location")
-            customStyle=true
-            fitlerable=false
-            autoFilterable=false
-          }}
-          @content={{this.options}}
-          @value={{this.previewLocation}}
-          class="preview-position-selector"
+        <DButton
+          @action={{this.composer.togglePreview}}
+          @translatedTitle={{this.composer.toggleText}}
+          @icon="editor-preview-hide"
+          class="btn-flat btn-mini-toggle top-bar-preview"
+        />
+      {{else}}
+        <DButton
+          @action={{this.composer.togglePreview}}
+          @translatedTitle={{this.composer.toggleText}}
+          @icon="editor-preview-show"
+          class="btn-flat btn-mini-toggle top-bar-preview"
         />
       {{/if}}
-    {{/unless}}
+    {{/if}}
+    {{#if this.composer.showPreview}}
+      <DropdownSelectBox
+        @nameProperty="label"
+        @onChange={{this.setPreviewLocation}}
+        @options={{hash
+          showCaret=false
+          showFullTitle=true
+          headerAriaLabel="preview_location"
+          title=(themePrefix "preview_location")
+          customStyle=true
+          fitlerable=false
+          autoFilterable=false
+        }}
+        @content={{this.options}}
+        @value={{this.previewLocation}}
+        class="preview-position-selector"
+      />
+    {{/if}}
   </template>
 }
