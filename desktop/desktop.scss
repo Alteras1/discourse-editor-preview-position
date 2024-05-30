@@ -163,6 +163,17 @@
       border-bottom: 1px solid var(--primary-low);
     }
   }
+  #reply-control.edit-title
+    .d-editor-container
+    .d-editor-textarea-column
+    .composer-fields:has(> div)
+    + .d-editor-textarea-wrapper {
+    border: none;
+    border-bottom: 1px solid var(--primary-low);
+    .d-editor-button-bar {
+      border: 1px solid var(--primary-400);
+    }
+  }
 }
 
 %preview-dragbar {
