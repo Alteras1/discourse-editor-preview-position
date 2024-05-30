@@ -2,7 +2,7 @@
 
 Allows the user to reposition and resize the preview in the composer for Discourse.
 
-For more information, please see: url to meta topic
+For more information, please see: [Editor Preview Position - Discourse Meta](https://meta.discourse.org/t/editor-preview-position/309934)
 
 ![composer gif](.github/images/editor-preview-position.gif)
 ![fullscreen composer gif](.github/images/editor-preview-position-fullscreen.gif)
