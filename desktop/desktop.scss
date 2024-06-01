@@ -241,6 +241,7 @@
     }
     .d-editor-preview-wrapper {
       flex: var(--composer-preview-flex, 1 1 0);
+      flex-shrink: 1;
     }
   }
 }
@@ -260,5 +261,12 @@
     .d-editor-container
     .d-editor-preview-wrapper {
     height: clamp(15%, var(--composer-preview-height, calc(50% - 16px)), 85%);
+  }
+  #reply-control .with-tags .title-input {
+    flex: 1 1 100%;
+    min-width: 100%;
+    #reply-title {
+      max-width: 100%;
+    }
   }
 }
