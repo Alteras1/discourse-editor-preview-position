@@ -1,0 +1,10 @@
+// disable component when RTE is enabled
+
+:root:has(button.composer-toggle-switch.--rte) {
+  .preview-position-selector,
+  .top-bar-preview,
+  .preview-dragbar-horizontal,
+  .preview-dragbar-vertical {
+    display: none !important;
+  }
+}
