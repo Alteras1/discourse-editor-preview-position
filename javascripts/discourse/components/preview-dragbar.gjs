@@ -33,6 +33,7 @@ function mouseXPos(e) {
 
 export default class PreviewDragbar extends Component {
   @service composer;
+  @service site;
 
   horizontalDragging = false;
   verticalDragging = false;
@@ -215,22 +216,24 @@ export default class PreviewDragbar extends Component {
   }
 
   <template>
-    {{#if this.composer.showPreview}}
-      {{#if settings.allow_resizable_horizontal_previews}}
-        <div
-          class="preview-dragbar-horizontal"
-          {{didInsert this.registerListeners}}
-          {{willDestroy this.unregisterListeners}}
-          {{on "dblclick" (fn this.doubleClick "horizontal")}}
-        ></div>
-      {{/if}}
-      {{#if settings.allow_resizable_vertical_previews}}
-        <div
-          class="preview-dragbar-vertical"
-          {{didInsert this.registerListeners}}
-          {{willDestroy this.unregisterListeners}}
-          {{on "dblclick" (fn this.doubleClick "vertical")}}
-        ></div>
+    {{#if this.site.desktopView}}
+      {{#if this.composer.showPreview}}
+        {{#if settings.allow_resizable_horizontal_previews}}
+          <div
+            class="preview-dragbar-horizontal"
+            {{didInsert this.registerListeners}}
+            {{willDestroy this.unregisterListeners}}
+            {{on "dblclick" (fn this.doubleClick "horizontal")}}
+          ></div>
+        {{/if}}
+        {{#if settings.allow_resizable_vertical_previews}}
+          <div
+            class="preview-dragbar-vertical"
+            {{didInsert this.registerListeners}}
+            {{willDestroy this.unregisterListeners}}
+            {{on "dblclick" (fn this.doubleClick "vertical")}}
+          ></div>
+        {{/if}}
       {{/if}}
     {{/if}}
   </template>
