@@ -118,7 +118,9 @@ RSpec.describe "Editor preview position" do
 
     drag_with_pointer(from: ".preview-dragbar.--horizontal", by: { x: -100 })
 
-    expect(element_rect(".d-editor-preview-wrapper")["width"]).to be_within(5).of(width_before + 100)
+    expect(element_rect(".d-editor-preview-wrapper")["width"]).to be_within(5).of(
+      width_before + 100,
+    )
   end
 
   it "clamps the preview at 85% of the container and does not overlap the editor" do
@@ -128,8 +130,7 @@ RSpec.describe "Editor preview position" do
     drag_with_pointer(from: ".preview-dragbar.--horizontal", by: { x: -9999 })
 
     # single snapshot so all coordinates are measured in the same JS frame
-    rects =
-      page.evaluate_script(<<~JS)
+    rects = page.evaluate_script(<<~JS)
         (function() {
           const p = document.querySelector('.d-editor-preview-wrapper').getBoundingClientRect();
           const e = document.querySelector('.d-editor-textarea-column').getBoundingClientRect();
