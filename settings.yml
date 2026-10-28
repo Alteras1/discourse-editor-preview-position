@@ -26,4 +26,4 @@ clean_composer_style:
   default: false
   type: bool
   description:
-    en: Alters the composer style to more closely match the fullscreen composer style.
+    en: "Alters the legacy composer style to more closely match the fullscreen composer style. No effect when the composer redesign is enabled."
