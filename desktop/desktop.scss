@@ -1,60 +1,3 @@
-.d-editor-container {
-  display: flex;
-  gap: 1rem;
-
-  .d-editor-preview-wrapper {
-    margin-left: unset;
-  }
-
-  .composer-preview-right & {
-    flex-direction: row;
-  }
-
-  .composer-preview-left & {
-    flex-direction: row-reverse;
-  }
-
-  .composer-preview-top & {
-    flex-direction: column-reverse;
-  }
-
-  .composer-preview-bottom & {
-    flex-direction: column;
-  }
-}
-
-.fullscreen-composer {
-  .composer-preview-left
-    #reply-control.fullscreen.show-preview
-    .d-editor-textarea-wrapper {
-    border-right: 0;
-    border-left: 1px solid var(--primary-low);
-  }
-
-  .composer-preview-top
-    #reply-control.fullscreen.show-preview
-    .d-editor-textarea-wrapper {
-    border-right: 0;
-    border-top: 1px solid var(--primary-low);
-  }
-
-  .composer-preview-bottom #reply-control.fullscreen.show-preview {
-    .d-editor-textarea-wrapper {
-      border-right: 0;
-      border-bottom: 1px solid var(--primary-low);
-    }
-
-    .d-editor-preview-wrapper {
-      margin-top: unset;
-    }
-  }
-}
-
-.composer-controls span {
-  display: inline-flex;
-  gap: 8px;
-}
-
 %sr-only {
   position: absolute;
   width: 1px;
@@ -67,6 +10,15 @@
   border-width: 0;
 }
 
+// Structural redesign detection — avoids the uc-enable-composer-redesign body
+// class, which will be removed when the redesign becomes permanent.
+//
+// In the redesign .composer-fields is a direct grid child of .d-editor-container.
+// In the legacy composer it lives inside .d-editor-textarea-column.
+$redesign: ".d-editor-container:has(> .composer-fields)";
+$legacy: ".d-editor-container:not(:has(> .composer-fields))";
+
+// preview position selector
 :is(.composer-open, .fullscreen-composer)
   .preview-position-selector.select-kit.single-select.dropdown-select-box {
   display: inline-flex;
@@ -126,35 +78,216 @@
   }
 }
 
-@if $top_bar_preview_button == "true" {
-  .toggle-preview {
-    display: none;
-  }
+// Hide the theme's preview button when core's native toggle is a sibling —
+// this is always the case in the redesign, so the button is never shown there.
+.top-bar-preview:has(~ .toggle-preview) {
+  display: none;
+}
 
+@if $top_bar_preview_button == "true" {
   .draft .top-bar-preview {
     display: none;
   }
 }
 
+// resize handle, placed on the edge of the editor that faces the preview
+#reply-control .preview-dragbar {
+  position: absolute;
+  z-index: 1;
+  background: transparent;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--tertiary);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &::before {
+    // improve clickable area
+    content: "";
+    position: absolute;
+    inset: -5px;
+  }
+
+  &.--horizontal {
+    inset-block: 0;
+    width: 2px;
+  }
+
+  &.--vertical {
+    inset-inline: 0;
+    height: 2px;
+  }
+}
+
+.composer-preview-right #reply-control .preview-dragbar {
+  inset-inline-end: -1px;
+}
+
+.composer-preview-left #reply-control .preview-dragbar {
+  inset-inline-start: -1px;
+}
+
+.composer-preview-top #reply-control .preview-dragbar {
+  inset-block-start: -1px;
+}
+
+.composer-preview-bottom #reply-control .preview-dragbar {
+  inset-block-end: -1px;
+}
+
+// redesigned composer: the container is a grid, so the preview is moved by
+// redefining the areas core declares ("fields" / "editor" / "preview")
+
+$preview-column: minmax(0, 1fr);
+
+@if $allow_resizable_horizontal_previews == "true" {
+  $preview-column: minmax(0, var(--composer-preview-width, 1fr));
+}
+
+$preview-row: minmax(0, 1fr);
+
+@if $allow_resizable_vertical_previews == "true" {
+  $preview-row: minmax(0, var(--composer-preview-height, 1fr));
+}
+
+body.composer-preview-right
+  #reply-control.show-preview
+  #{$redesign}.--markdown-editor-enabled {
+  grid-template-columns: minmax(0, 1fr) $preview-column;
+}
+
+body.composer-preview-left
+  #reply-control.show-preview
+  #{$redesign}.--markdown-editor-enabled {
+  grid-template-columns: $preview-column minmax(0, 1fr);
+  grid-template-areas:
+    "fields fields"
+    "preview editor";
+
+  .d-editor-preview-wrapper {
+    border-left: 0;
+    border-right: 1px solid var(--primary-low);
+  }
+}
+
+body.composer-preview-top
+  #reply-control.show-preview
+  #{$redesign}.--markdown-editor-enabled {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: min-content $preview-row minmax(0, 1fr);
+  grid-template-areas:
+    "fields"
+    "preview"
+    "editor";
+
+  .d-editor-preview-wrapper {
+    border-left: 0;
+    border-bottom: 1px solid var(--primary-low);
+  }
+}
+
+body.composer-preview-bottom
+  #reply-control.show-preview
+  #{$redesign}.--markdown-editor-enabled {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: min-content minmax(0, 1fr) $preview-row;
+  grid-template-areas:
+    "fields"
+    "editor"
+    "preview";
+
+  .d-editor-preview-wrapper {
+    border-left: 0;
+    border-top: 1px solid var(--primary-low);
+  }
+}
+
+// core draws a divider on both the editor and the preview when fullscreen;
+// .--markdown-editor-enabled is omitted here because show-preview already
+// implies markdown mode (the rich editor never sets it)
+#reply-control.fullscreen.show-preview #{$redesign} .d-editor-textarea-wrapper {
+  border: 0;
+}
+
+// legacy composer: the container is a flex box
+
+#reply-control #{$legacy} {
+  display: flex;
+  gap: 1rem;
+
+  .d-editor-preview-wrapper {
+    margin-left: unset;
+  }
+}
+
+body.composer-preview-right #reply-control #{$legacy} {
+  flex-direction: row;
+}
+
+body.composer-preview-left #reply-control #{$legacy} {
+  flex-direction: row-reverse;
+}
+
+body.composer-preview-top #reply-control #{$legacy} {
+  flex-direction: column-reverse;
+}
+
+body.composer-preview-bottom #reply-control #{$legacy} {
+  flex-direction: column;
+}
+
+.fullscreen-composer {
+  body.composer-preview-left
+    #reply-control.fullscreen.show-preview
+    #{$legacy}
+    .d-editor-textarea-wrapper {
+    border-right: 0;
+    border-left: 1px solid var(--primary-low);
+  }
+
+  body.composer-preview-top
+    #reply-control.fullscreen.show-preview
+    #{$legacy}
+    .d-editor-textarea-wrapper {
+    border-right: 0;
+    border-top: 1px solid var(--primary-low);
+  }
+
+  body.composer-preview-bottom
+    #reply-control.fullscreen.show-preview
+    #{$legacy} {
+    .d-editor-textarea-wrapper {
+      border-right: 0;
+      border-bottom: 1px solid var(--primary-low);
+    }
+
+    .d-editor-preview-wrapper {
+      margin-top: unset;
+    }
+  }
+}
+
 @if $clean_composer_style == "true" {
-  #reply-control:not(.fullscreen) {
-    .d-editor-container {
-      border-top: 1px solid var(--primary-low);
-      gap: 0;
+  #reply-control:not(.fullscreen) #{$legacy} {
+    border-top: 1px solid var(--primary-low);
+    gap: 0;
 
-      .d-editor-textarea-wrapper {
-        border: none;
-      }
+    .d-editor-textarea-wrapper {
+      border: none;
+    }
 
-      .d-editor-preview-wrapper {
-        margin-top: 1rem;
-      }
+    .d-editor-preview-wrapper {
+      margin-top: 1rem;
     }
   }
 
-  .composer-preview-right
+  body.composer-preview-right
     #reply-control.show-preview:not(.fullscreen)
-    .d-editor-container {
+    #{$legacy} {
     .d-editor-textarea-wrapper {
       border-right: 1px solid var(--primary-low);
     }
@@ -164,9 +297,9 @@
     }
   }
 
-  .composer-preview-left
+  body.composer-preview-left
     #reply-control.show-preview:not(.fullscreen)
-    .d-editor-container {
+    #{$legacy} {
     .d-editor-textarea-wrapper {
       border-left: 1px solid var(--primary-low);
     }
@@ -176,9 +309,9 @@
     }
   }
 
-  .composer-preview-top
+  body.composer-preview-top
     #reply-control.show-preview:not(.fullscreen)
-    .d-editor-container {
+    #{$legacy} {
     .d-editor-textarea-wrapper {
       border-top: 1px solid var(--primary-low);
     }
@@ -188,16 +321,16 @@
     }
   }
 
-  .composer-preview-bottom
+  body.composer-preview-bottom
     #reply-control.show-preview:not(.fullscreen)
-    .d-editor-container {
+    #{$legacy} {
     .d-editor-textarea-wrapper {
       border-bottom: 1px solid var(--primary-low);
     }
   }
 
   #reply-control.edit-title
-    .d-editor-container
+    #{$legacy}
     .d-editor-textarea-column
     .composer-fields:has(> div)
     + .d-editor-textarea-wrapper {
@@ -210,72 +343,12 @@
   }
 }
 
-%preview-dragbar {
-  display: none;
-  position: absolute;
-
-  &:hover {
-    background-color: var(--tertiary);
-  }
-
-  &::before {
-    // improve clickable area
-    position: absolute;
-    content: "";
-    top: -5px;
-    right: -5px;
-    left: -5px;
-    bottom: -5px;
-    z-index: 40;
-  }
-}
-
-.preview-dragbar-horizontal {
-  @extend %preview-dragbar;
-  width: 2px;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-
-  .composer-preview-right & {
-    display: block;
-    right: -1px;
-    cursor: col-resize;
-  }
-
-  .composer-preview-left & {
-    display: block;
-    left: -1px;
-    cursor: col-resize;
-  }
-}
-
-.preview-dragbar-vertical {
-  @extend %preview-dragbar;
-  width: 100%;
-  height: 2px;
-  left: 0;
-  right: 0;
-
-  .composer-preview-top & {
-    display: block;
-    top: -1px;
-    cursor: row-resize;
-  }
-
-  .composer-preview-bottom & {
-    bottom: -1px;
-    display: block;
-    cursor: row-resize;
-  }
-}
-
 @if $allow_resizable_horizontal_previews ==
   "true" or
   $allow_resizable_vertical_previews ==
   "true"
 {
-  #reply-control.show-preview .d-editor-container {
+  #reply-control.show-preview #{$legacy} {
     .d-editor-textarea-column {
       flex: 1 1 0;
     }
@@ -288,23 +361,23 @@
 }
 
 @if $allow_resizable_horizontal_previews == "true" {
-  :is(.composer-preview-right, .composer-preview-left)
+  body:is(.composer-preview-right, .composer-preview-left)
     #reply-control.show-preview
-    .d-editor-container
+    #{$legacy}
     .d-editor-preview-wrapper {
     width: clamp(15%, var(--composer-preview-width, calc(50% - 16px)), 85%);
   }
 }
 
 @if $allow_resizable_vertical_previews == "true" {
-  :is(.composer-preview-top, .composer-preview-bottom)
+  body:is(.composer-preview-top, .composer-preview-bottom)
     #reply-control.show-preview
-    .d-editor-container
+    #{$legacy}
     .d-editor-preview-wrapper {
     height: clamp(15%, var(--composer-preview-height, calc(50% - 16px)), 85%);
   }
 
-  #reply-control .with-tags .title-input {
+  #reply-control:has(#{$legacy}) .with-tags .title-input {
     flex: 1 1 100%;
     min-width: 100%;
 
