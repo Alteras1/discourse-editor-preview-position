@@ -1,8 +1,8 @@
 import { apiInitializer } from "discourse/lib/api";
-import PreviewDragbar from "../components/preview-dragbar";
-import PreviewPositionSelector from "../components/preview-position-selector";
+import PreviewDragbar from "../components/preview-dragbar.gjs";
+import PreviewPositionSelector from "../components/preview-position-selector.gjs";
 
-export default apiInitializer("1.13.0", (api) => {
+export default apiInitializer((api) => {
   api.renderInOutlet("before-composer-toggles", PreviewPositionSelector);
   api.renderInOutlet("after-d-editor", PreviewDragbar);
 });

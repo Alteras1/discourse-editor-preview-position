@@ -220,7 +220,10 @@ export default class PreviewDragbar extends Component {
       {{#if this.composer.showPreview}}
         {{#if settings.allow_resizable_horizontal_previews}}
           <div
+            aria-orientation="vertical"
             class="preview-dragbar-horizontal"
+            role="separator"
+            tabindex="0"
             {{didInsert this.registerListeners}}
             {{willDestroy this.unregisterListeners}}
             {{on "dblclick" (fn this.doubleClick "horizontal")}}
@@ -228,7 +231,10 @@ export default class PreviewDragbar extends Component {
         {{/if}}
         {{#if settings.allow_resizable_vertical_previews}}
           <div
+            aria-orientation="horizontal"
             class="preview-dragbar-vertical"
+            role="separator"
+            tabindex="0"
             {{didInsert this.registerListeners}}
             {{willDestroy this.unregisterListeners}}
             {{on "dblclick" (fn this.doubleClick "vertical")}}
