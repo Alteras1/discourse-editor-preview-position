@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Editor preview position", type: :system do
+RSpec.describe "Editor preview position" do
   fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
 
   let(:composer) { PageObjects::Components::Composer.new }
