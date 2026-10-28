@@ -9,31 +9,41 @@
   .composer-preview-right & {
     flex-direction: row;
   }
+
   .composer-preview-left & {
     flex-direction: row-reverse;
   }
+
   .composer-preview-top & {
     flex-direction: column-reverse;
   }
+
   .composer-preview-bottom & {
     flex-direction: column;
   }
 }
 
 .fullscreen-composer {
-  .composer-preview-left #reply-control.fullscreen.show-preview .d-editor-textarea-wrapper {
+  .composer-preview-left
+    #reply-control.fullscreen.show-preview
+    .d-editor-textarea-wrapper {
     border-right: 0;
     border-left: 1px solid var(--primary-low);
   }
-  .composer-preview-top #reply-control.fullscreen.show-preview .d-editor-textarea-wrapper {
+
+  .composer-preview-top
+    #reply-control.fullscreen.show-preview
+    .d-editor-textarea-wrapper {
     border-right: 0;
     border-top: 1px solid var(--primary-low);
   }
+
   .composer-preview-bottom #reply-control.fullscreen.show-preview {
     .d-editor-textarea-wrapper {
       border-right: 0;
       border-bottom: 1px solid var(--primary-low);
     }
+
     .d-editor-preview-wrapper {
       margin-top: unset;
     }
@@ -52,17 +62,19 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border-width: 0;
 }
 
-:is(.composer-open, .fullscreen-composer) .preview-position-selector.select-kit.single-select.dropdown-select-box {
+:is(.composer-open, .fullscreen-composer)
+  .preview-position-selector.select-kit.single-select.dropdown-select-box {
   display: inline-flex;
 }
 
 .preview-position-selector.select-kit.single-select.dropdown-select-box {
   display: none;
+
   summary.dropdown-select-box-header {
     // based on the styles for .btn .btn-transparant and .btn-mini-toggle
     font-size: var(--font-0);
@@ -74,7 +86,7 @@
     margin: 0;
     font-weight: normal;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0) !important;
+    background: rgb(0, 0, 0, 0) !important;
     border: 0 !important;
     color: var(--primary);
     border-radius: var(--d-border-radius);
@@ -92,17 +104,21 @@
       @extend %sr-only;
     }
   }
+
   .select-kit-body {
     min-width: unset !important;
+
     li.dropdown-select-box-row {
       padding: 0.4em 0.467em;
 
       .icons {
         margin-right: 0;
+
         .d-icon {
           font-size: var(--font-0);
         }
       }
+
       .texts {
         @extend %sr-only;
       }
@@ -110,16 +126,17 @@
   }
 }
 
-@if $top_bar_preview_button == 'true' {
+@if $top_bar_preview_button == "true" {
   .toggle-preview {
     display: none;
   }
+
   .draft .top-bar-preview {
     display: none;
   }
 }
 
-@if $clean_composer_style == 'true' {
+@if $clean_composer_style == "true" {
   #reply-control:not(.fullscreen) {
     .d-editor-container {
       border-top: 1px solid var(--primary-low);
@@ -134,35 +151,51 @@
       }
     }
   }
-  .composer-preview-right #reply-control.show-preview:not(.fullscreen) .d-editor-container {
+
+  .composer-preview-right
+    #reply-control.show-preview:not(.fullscreen)
+    .d-editor-container {
     .d-editor-textarea-wrapper {
       border-right: 1px solid var(--primary-low);
     }
+
     .d-editor-preview-wrapper .d-editor-preview {
       padding-left: 1rem;
     }
   }
-  .composer-preview-left #reply-control.show-preview:not(.fullscreen) .d-editor-container {
+
+  .composer-preview-left
+    #reply-control.show-preview:not(.fullscreen)
+    .d-editor-container {
     .d-editor-textarea-wrapper {
       border-left: 1px solid var(--primary-low);
     }
+
     .d-editor-preview-wrapper .d-editor-preview {
       padding-right: 1rem;
     }
   }
-  .composer-preview-top #reply-control.show-preview:not(.fullscreen) .d-editor-container {
+
+  .composer-preview-top
+    #reply-control.show-preview:not(.fullscreen)
+    .d-editor-container {
     .d-editor-textarea-wrapper {
       border-top: 1px solid var(--primary-low);
     }
+
     .d-editor-preview-wrapper {
       margin-bottom: 1rem;
     }
   }
-  .composer-preview-bottom #reply-control.show-preview:not(.fullscreen) .d-editor-container {
+
+  .composer-preview-bottom
+    #reply-control.show-preview:not(.fullscreen)
+    .d-editor-container {
     .d-editor-textarea-wrapper {
       border-bottom: 1px solid var(--primary-low);
     }
   }
+
   #reply-control.edit-title
     .d-editor-container
     .d-editor-textarea-column
@@ -170,6 +203,7 @@
     + .d-editor-textarea-wrapper {
     border: none;
     border-bottom: 1px solid var(--primary-low);
+
     .d-editor-button-bar {
       border: 1px solid var(--primary-400);
     }
@@ -183,10 +217,11 @@
   &:hover {
     background-color: var(--tertiary);
   }
-  &:before {
+
+  &::before {
     // improve clickable area
     position: absolute;
-    content: '';
+    content: "";
     top: -5px;
     right: -5px;
     left: -5px;
@@ -207,6 +242,7 @@
     right: -1px;
     cursor: col-resize;
   }
+
   .composer-preview-left & {
     display: block;
     left: -1px;
@@ -234,11 +270,16 @@
   }
 }
 
-@if $allow_resizable_horizontal_previews == 'true' or $allow_resizable_vertical_previews == 'true' {
+@if $allow_resizable_horizontal_previews ==
+  "true" or
+  $allow_resizable_vertical_previews ==
+  "true"
+{
   #reply-control.show-preview .d-editor-container {
     .d-editor-textarea-column {
       flex: 1 1 0;
     }
+
     .d-editor-preview-wrapper {
       flex: var(--composer-preview-flex, 1 1 0);
       flex-shrink: 1;
@@ -246,7 +287,7 @@
   }
 }
 
-@if $allow_resizable_horizontal_previews == 'true' {
+@if $allow_resizable_horizontal_previews == "true" {
   :is(.composer-preview-right, .composer-preview-left)
     #reply-control.show-preview
     .d-editor-container
@@ -255,16 +296,18 @@
   }
 }
 
-@if $allow_resizable_vertical_previews == 'true' {
+@if $allow_resizable_vertical_previews == "true" {
   :is(.composer-preview-top, .composer-preview-bottom)
     #reply-control.show-preview
     .d-editor-container
     .d-editor-preview-wrapper {
     height: clamp(15%, var(--composer-preview-height, calc(50% - 16px)), 85%);
   }
+
   #reply-control .with-tags .title-input {
     flex: 1 1 100%;
     min-width: 100%;
+
     #reply-title {
       max-width: 100%;
     }

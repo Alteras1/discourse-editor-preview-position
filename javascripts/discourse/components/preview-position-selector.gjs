@@ -3,9 +3,9 @@ import { tracked } from "@glimmer/tracking";
 import { hash } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
-import DButton from "discourse/components/d-button";
-import I18n from "discourse-i18n";
-import DropdownSelectBox from "select-kit/components/dropdown-select-box";
+import DropdownSelectBox from "discourse/select-kit/components/dropdown-select-box";
+import DButton from "discourse/ui-kit/d-button";
+import { i18n } from "discourse-i18n";
 
 export default class PreviewPositionSelector extends Component {
   @service composer;
@@ -38,13 +38,13 @@ export default class PreviewPositionSelector extends Component {
     let options = [
       {
         id: "right",
-        label: I18n.t(themePrefix("preview_location_right")),
+        label: i18n(themePrefix("preview_location_right")),
         value: "right",
         icon: "editor-preview-right",
       },
       {
         id: "left",
-        label: I18n.t(themePrefix("preview_location_left")),
+        label: i18n(themePrefix("preview_location_left")),
         value: "left",
         icon: "editor-preview-left",
       },
@@ -52,13 +52,13 @@ export default class PreviewPositionSelector extends Component {
     if (settings.allow_top_bottom_previews) {
       options.push({
         id: "top",
-        label: I18n.t(themePrefix("preview_location_top")),
+        label: i18n(themePrefix("preview_location_top")),
         value: "top",
         icon: "editor-preview-top",
       });
       options.push({
         id: "bottom",
-        label: I18n.t(themePrefix("preview_location_bottom")),
+        label: i18n(themePrefix("preview_location_bottom")),
         value: "bottom",
         icon: "editor-preview-bottom",
       });
@@ -102,22 +102,24 @@ export default class PreviewPositionSelector extends Component {
       {{#if settings.top_bar_preview_button}}
         {{#if this.composer.showPreview}}
           <DButton
-            @action={{this.composer.togglePreview}}
-            @translatedTitle={{this.composer.toggleText}}
-            @icon="editor-preview-hide"
             class="btn-flat btn-mini-toggle top-bar-preview"
+            @action={{this.composer.togglePreview}}
+            @icon="editor-preview-hide"
+            @translatedTitle={{this.composer.toggleText}}
           />
         {{else}}
           <DButton
-            @action={{this.composer.togglePreview}}
-            @translatedTitle={{this.composer.toggleText}}
-            @icon="editor-preview-show"
             class="btn-flat btn-mini-toggle top-bar-preview"
+            @action={{this.composer.togglePreview}}
+            @icon="editor-preview-show"
+            @translatedTitle={{this.composer.toggleText}}
           />
         {{/if}}
       {{/if}}
       {{#if this.composer.showPreview}}
         <DropdownSelectBox
+          class="preview-position-selector"
+          @content={{this.options}}
           @nameProperty="label"
           @onChange={{this.setPreviewLocation}}
           @options={{hash
@@ -129,9 +131,7 @@ export default class PreviewPositionSelector extends Component {
             fitlerable=false
             autoFilterable=false
           }}
-          @content={{this.options}}
           @value={{this.previewLocation}}
-          class="preview-position-selector"
         />
       {{/if}}
     {{/if}}
